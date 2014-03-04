@@ -1,0 +1,23 @@
+{
+  "name": "Tab Schedule",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "Open URLs on a schedule.",
+
+  "background": {
+    "scripts": ["jquery-2.1.0.min.js", "moment.min.js", "lib.js", "background.js"]
+  },
+
+  "options_page": "options.html",
+
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+
+  "icons": {
+    "16":   "icon.png",
+    "48":   "icon.png",
+    "128":  "icon.png"
+  }
+}

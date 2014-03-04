@@ -1,0 +1,41 @@
+!!! 5
+%html
+  %head
+    %title Tab Schedule
+    %link{href: "bootstrap.min.css", rel: "stylesheet"}
+    %link{href: "bootstrap-theme.min.css", rel: "stylesheet"}
+    %link{href: "stylesheet.css", rel: "stylesheet"}
+    %script{src: "jquery-2.1.0.min.js"}
+    %script{src: "jquery.timePicker.js"}
+    %script{src: "bootstrap.min.js"}
+    %script{src: "moment.min.js"}
+    %script{src: "lib.js"}
+    %script{src: "options.js"}
+  %body
+    .container
+      .row
+        .col-md-8.col-md-offset-2
+          %h1
+            Tab Schedule Options
+          %hr
+
+          .new_tab
+            %label
+              Add a new URL to schedule:
+            .input-group
+              %input.url.form-control{type: "text", placeholder: "http://"}
+              .input-group-btn
+                %button.save.btn.btn-primary{type: "button"}
+                  Add URL
+
+          %hr
+
+          %table.table.tabs
+            %thead
+              %tr
+                %th
+                  URL
+                %th
+                  Schedule
+                %th
+            %tbody

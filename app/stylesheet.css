@@ -1,0 +1,36 @@
+.tab .remove {
+  cursor: pointer;
+}
+input.time-selector {
+  cursor: default;
+  background-color: #ffffff;
+}
+div.time-picker {
+  position: absolute;
+  height: 191px;
+  width: 212px;
+  overflow: auto;
+  background: #fff;
+  border: 1px solid #ccc;
+  z-index: 1051;
+  padding: 4px 3px;
+  margin: 0;
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.075);
+}
+div.time-picker-12hours {
+  width: 6em;
+  /* needed for IE */
+}
+div.time-picker ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+div.time-picker li {
+  cursor: pointer;
+  padding: 2px 3px;
+}
+div.time-picker li.selected {
+  background: #53a3b7;
+  color: #fff;
+}
