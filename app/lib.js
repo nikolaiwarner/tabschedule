@@ -39,12 +39,13 @@ TabSchedule = (function() {
   };
 
   TabSchedule.prototype.add_tab = function(url, callback) {
-    var new_url;
-    new_url = {
+    var new_tab;
+    new_tab = {
       id: (new Date()).getTime(),
-      url: url
+      url: url,
+      schedules: []
     };
-    this.tabs.push(new_url);
+    this.tabs.push(new_tab);
     return this.save_tabs(callback);
   };
 
@@ -64,12 +65,13 @@ TabSchedule = (function() {
       return t.id === id;
     }))[0];
     index = $.inArray(tab, this.tabs);
-    tab.schedules = tab.schedules || [];
+    console.log(tab, index);
     tab.schedules.push({
       day: day,
       time: time
     });
     this.tabs[index] = tab;
+    console.log(this.tabs);
     return this.save_tabs(callback);
   };
 
@@ -79,11 +81,13 @@ TabSchedule = (function() {
       return t.id === id;
     }))[0];
     index = $.inArray(tab, this.tabs);
-    tab.schedules = tab.schedules.filter(function(schedule) {
-      return (schedule.day !== day) && (schedule.time !== time);
-    });
-    this.tabs[index] = tab;
-    return this.save_tabs(callback);
+    if (tab.schedules) {
+      tab.schedules = tab.schedules.filter(function(schedule) {
+        return (schedule.day !== day) && (schedule.time !== time);
+      });
+      this.tabs[index] = tab;
+      return this.save_tabs(callback);
+    }
   };
 
   TabSchedule.prototype.mark_as_opened = function(id, schedule_to_mark, callback) {
@@ -92,14 +96,16 @@ TabSchedule = (function() {
       return t.id === id;
     }))[0];
     index = $.inArray(tab, this.tabs);
-    tab.schedules = tab.schedules.map(function(schedule) {
-      if ((schedule.day === schedule_to_mark.day) && (schedule.time === schedule_to_mark.time)) {
-        schedule_to_mark.last_opened = moment().format('L');
-      }
-      return schedule_to_mark;
-    });
-    this.tabs[index] = tab;
-    return this.save_tabs(callback);
+    if (tab.schedules) {
+      tab.schedules = tab.schedules.map(function(schedule) {
+        if ((schedule.day === schedule_to_mark.day) && (schedule.time === schedule_to_mark.time)) {
+          schedule.last_opened = moment().format('L');
+        }
+        return schedule;
+      });
+      this.tabs[index] = tab;
+      return this.save_tabs(callback);
+    }
   };
 
   TabSchedule.prototype.opened_today = function(schedule) {

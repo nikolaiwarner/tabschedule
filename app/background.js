@@ -20,6 +20,7 @@ check_time = function() {
             if (schedule.day === moment().format('dddd')) {
               if (!tabschedule.opened_today(schedule)) {
                 if (moment().isAfter(moment(date + " " + schedule.time))) {
+                  console.log('opening', tab.id, schedule);
                   tabschedule.mark_as_opened(tab.id, schedule);
                   _results1.push(tabschedule.open_url(tab.url, function() {
                     return console.log('opened', tab.url);
