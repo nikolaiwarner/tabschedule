@@ -16,7 +16,7 @@ TabSchedule = (function() {
   }
 
   TabSchedule.prototype.save_tabs = function(callback) {
-    return chrome.storage.sync.set({
+    return chrome.storage.local.set({
       'tabs': this.tabs
     }, (function(_this) {
       return function() {
@@ -28,7 +28,7 @@ TabSchedule = (function() {
   };
 
   TabSchedule.prototype.load_tabs = function(callback) {
-    return chrome.storage.sync.get('tabs', (function(_this) {
+    return chrome.storage.local.get('tabs', (function(_this) {
       return function(data) {
         _this.tabs = data.tabs || [];
         if (callback) {

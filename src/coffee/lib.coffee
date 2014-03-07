@@ -3,11 +3,11 @@ class TabSchedule
     @tabs = []
 
   save_tabs: (callback) =>
-    chrome.storage.sync.set {'tabs': @tabs}, =>
+    chrome.storage.local.set {'tabs': @tabs}, =>
       callback() if callback
 
   load_tabs: (callback) =>
-    chrome.storage.sync.get 'tabs', (data) =>
+    chrome.storage.local.get 'tabs', (data) =>
       @tabs = data.tabs || []
       callback() if callback
 
