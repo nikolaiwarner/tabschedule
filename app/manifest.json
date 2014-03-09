@@ -1,8 +1,8 @@
 {
   "name": "Tab Schedule",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "manifest_version": 2,
-  "description": "Open URLs on a schedule.",
+  "description": "Open URLs automatically on a weekly schedule.",
 
   "background": {
     "scripts": ["jquery-2.1.0.min.js", "moment.min.js", "lib.js", "background.js"]

@@ -28,12 +28,10 @@ class TabSchedule
   add_schedule: (id, day, time, callback) =>
     tab = $.grep(@tabs, ((t) -> t.id == id))[0]
     index = $.inArray(tab, @tabs)
-    console.log tab, index
     tab.schedules.push
       day: day
       time: time
     @tabs[index] = tab
-    console.log @tabs
     @save_tabs(callback)
 
   remove_schedule: (id, day, time, callback) =>

@@ -16,19 +16,17 @@
       .row
         .col-md-8.col-md-offset-2
           %h1
-            Tab Schedule Options
+            Tab Schedule
           %hr
 
-          .new_tab
+          .well.well-default.new_tab
             %label
               Add a new URL to schedule:
             .input-group
               %input.url.form-control{type: "text", placeholder: "http://"}
               .input-group-btn
-                %button.save.btn.btn-primary{type: "button"}
+                %button.save.btn.btn-default{type: "button"}
                   Add URL
-
-          %hr
 
           %table.table.tabs
             %thead
@@ -36,6 +34,17 @@
                 %th
                   URL
                 %th
-                  Schedule
+                  Will open every
                 %th
             %tbody
+
+          %hr
+
+          %footer
+            %ul.list-inline
+              %li
+                %a{href: "https://github.com/nikolaiwarner/tabschedule/issues"}
+                  Report an issue
+              %li.pull-right
+                %a{href: "http://nwarner.com"}
+                  Created by Nikolai Warner

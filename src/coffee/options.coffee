@@ -1,6 +1,9 @@
 tabschedule = new TabSchedule()
 
 update_list = ->
+  if tabschedule.tabs.length > 0
+    $('.tabs').show()
+
   $tab_list = $('.tabs tbody')
   $tab_list.empty()
 
@@ -9,12 +12,13 @@ update_list = ->
     day = tab.day || "saturday"
     time = tab.time || "12:00 PM"
     row = "<tr id='tab#{tab.id}' data-id='#{tab.id}' class='tab'>
-            <td>
+            <td class='url'>
               <a href='#{tab.url}'>#{tab.url}</a>
             </td>
             <td class='schedule'>
-              <div class='schedules'></div>
-              <div class='input-group input-group-sm schedule_form'>
+              <ul class='list-group schedules'></ul>
+              <label>Add a day and time:</label>
+              <div class='input-group input-group-sm schedule-form'>
                 <span class='input-group-addon'>
                   <select class='day'>
                     <option value='Monday'>Monday</option>
@@ -27,34 +31,34 @@ update_list = ->
                   </select>
                 </span>
                 <input type='text' class='form-control time' id='time#{tab.id}' value='#{time}'>
-                <div class='input-group-btn'><button type='button' class='save btn btn-primary'>Add Schedule</button></div>
+                <div class='input-group-btn'><button type='button' class='save btn btn-default'>+</button></div>
               </div>
             </td>
             <td>
-                <span class='remove remove_tab'>x</span>
+              <span class='remove remove-tab'>x</span>
             </td>
           </tr>"
     $tab_list.append row
 
     if tab.schedules
       for schedule in tab.schedules
-        schedule_html = "<div class='schedule'>
+        schedule_html = "<li class='list-group-item schedule-item'>
           <span class='day'>#{schedule.day}</span>
-          <span class='time'>#{schedule.time}</span>
-          <span class='remove remove_schedule'>x</span>
-        </div>"
+          <span class='time'>at #{schedule.time}</span>
+          <span class='remove remove-schedule pull-right'>x</span>
+        </li>"
         $("#tab#{tab.id} .schedules").append schedule_html
 
-    $("#tab#{tab.id} .schedule_form .save").on 'click', (event) ->
+    $("#tab#{tab.id} .schedule-form .save").on 'click', (event) ->
       id = $(event.currentTarget).closest('tr').data('id')
-      day = $("#tab#{id} .schedule_form .day").val()
-      time = $("#tab#{id} .schedule_form .time").val()
+      day = $("#tab#{id} .schedule-form .day").val()
+      time = $("#tab#{id} .schedule-form .time").val()
       tabschedule.add_schedule id, day, time, ->
         update_list()
 
-    $("#tab#{tab.id} .schedules .remove_schedule").on 'click', (event) ->
+    $("#tab#{tab.id} .schedules .remove-schedule").on 'click', (event) ->
       id = $(event.currentTarget).closest('tr').data('id')
-      $schedule = $(event.currentTarget).closest('.schedule')
+      $schedule = $(event.currentTarget).closest('.schedule-item')
       day = $schedule.find('.day').text()
       time = $schedule.find('.time').text()
       tabschedule.remove_schedule id, day, time, ->
@@ -64,7 +68,7 @@ update_list = ->
       show24Hours: false
       step: 15
 
-  $('.tab .remove_tab').on 'click', (event) ->
+  $('.tab .remove-tab').on 'click', (event) ->
     id = $(event.currentTarget).closest('tr').data('id')
     tabschedule.remove_tab id, ->
       update_list()

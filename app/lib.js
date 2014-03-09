@@ -65,13 +65,11 @@ TabSchedule = (function() {
       return t.id === id;
     }))[0];
     index = $.inArray(tab, this.tabs);
-    console.log(tab, index);
     tab.schedules.push({
       day: day,
       time: time
     });
     this.tabs[index] = tab;
-    console.log(this.tabs);
     return this.save_tabs(callback);
   };
 
